@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchRepositories } from "../store/action";
+import Table from '../components/Table'
 
 function Home() {
+  const dispatch = useDispatch()
   const [inputData, setInputData] = useState('')
+  const repositories = useSelector(state => state.repositories)
+
+  useEffect(() => {
+    dispatch(fetchRepositories(inputData));
+  }, [dispatch]);
 
   function handleInputChange(event) {
     setInputData(event.target.value)
-    console.log(inputData);
   }
 
   function submit() {
-
+    dispatch(fetchRepositories(inputData));
+    console.log(repositories);
   }
 
   return (
@@ -20,7 +29,10 @@ function Home() {
         <div className="row justify-content-center mb-3">
           <input type="username" className="form-control w-25" placeholder="loshaless" onChange={handleInputChange} />
         </div>
-        <button type="button" class="btn btn-primary w-25" onChange={submit}>Submit</button>
+        <button type="button" className="btn btn-primary w-25 mb-5" onClick={submit}>Submit</button>
+        {repositories.length !== 0 && (
+          <Table key={repositories.id} data={repositories} />
+        )}
       </div>
     </div>
   )
