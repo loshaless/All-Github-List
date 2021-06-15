@@ -13,7 +13,9 @@ export function fetchRepositories(user) {
       dispatch({ type: 'ADD_REPOSITORIES', payload: data })
     }
     catch (error) {
-      console.log(error.response);
+      if (error.response.status) {
+        dispatch({ type: 'ADD_REPOSITORIES', payload: [] })
+      }
     }
   }
 }

@@ -1,12 +1,17 @@
 import React from 'react'
 
-function TableData() {
+function TableData({ name, index, description, updated_at }) {
+  function separateValue(date) {
+    let tanggal = date.split("T");
+    return tanggal[0]
+  }
+
   return (
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th scope="row">{index}</th>
+      <td>{name}</td>
+      <td>{description}</td>
+      <td>{separateValue(updated_at)}</td>
     </tr>
   )
 }

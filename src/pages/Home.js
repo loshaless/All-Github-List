@@ -31,7 +31,7 @@ function Home() {
         </div>
         <button type="button" className="btn btn-primary w-25 mb-5" onClick={submit}>Submit</button>
         {repositories.length !== 0 && (
-          <Table key={repositories.id} data={repositories} />
+          <Table data={repositories} />
         )}
       </div>
     </div>
